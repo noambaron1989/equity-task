@@ -10,14 +10,69 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Company {
+  id                  Int      @id @default(autoincrement())
+  name                String   @unique
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  latestFMVPrice      Float 
+  lastFundingType     FundingType
+  lastFundingDate     DateTime
+  lastFundingAmount   Float
+  equityGrants        EquityGrant[]
+}
+
 model Employee {
   id          Int       @id @default(autoincrement())
-  email       String    @unique
-  name        String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  email       String   @unique
+  firstName   String
+  lastName    String
+  residency   Residency
   role        String
+  equityGrants EquityGrant[]
 }
 
 model EquityGrant {
-  id          Int      @id @default(autoincrement())
-  // TODO: Complete
+  id                  Int      @id @default(autoincrement())
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  employeeId          Int
+  employee            Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  companyId           Int
+  company             Company  @relation(fields: [companyId], references: [id])
+  grantDate           DateTime
+  grantType           GrantType
+  exerciseDate        DateTime
+  deadline            DateTime
+  sharePrice          Float    
+  totalNumberOfShares Int
+  totalNumberOfVestedShares Int
+}
+
+enum Residency {
+  US 
+  IL 
+  GB 
+  CA 
+  AU 
+  DE 
+  FR 
+  JP 
+  IN 
+}
+
+enum GrantType {
+  ISO
+  NSO
+}
+
+enum FundingType {
+  SEED
+  PRIVATE_EQUITY
+  M_N_A
+  LATE_STAGE_VENTURE
+  IPO
+  EARLY_STAGE_VENTURE
 }

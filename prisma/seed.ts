@@ -7,12 +7,15 @@ const prisma = new PrismaClient();
 
 async function main() {
   const employees = []
+  const companies = []
   const alice = await prisma.employee.upsert({
       where: { email: 'alice@prisma.io' },
       update: {},
       create: {
       email: 'alice@prisma.io',
-      name: 'Alice',
+      firstName: 'Alice',
+      lastName: 'Wonderland',
+      residency: 'US',
       role: 'SWE'
       },
   })
@@ -22,7 +25,9 @@ async function main() {
     update: {},
     create: {
     email: 'bob@prisma.io',
-    name: 'Alice',
+    firstName: 'Bob',
+    lastName: 'Smith',
+    residency: 'US',
     role: 'SWE'
     },
   })
@@ -32,13 +37,54 @@ async function main() {
     update: {},
     create: {
     email: 'boss@prisma.io',
-    name: 'Alice',
+    firstName: 'Bruce',
+    lastName: 'Cooper',
+    residency: 'US',
     role: 'STL'
+    },
+  })
+
+
+
+  const carta = await prisma.company.upsert({
+    where: { name: 'Carte' },
+    update: {},
+    create: {
+      name: 'Carte',
+      latestFMVPrice: 10.85,
+      lastFundingType: 'EARLY_STAGE_VENTURE',     
+      lastFundingDate:  '2024-01-07T00:00:00Z',
+      lastFundingAmount:  100000000
+    },
+  })
+  const reddit = await prisma.company.upsert({
+    where: { name: 'Reddit' },
+    update: {},
+    create: {
+      name: 'Reddit',
+      latestFMVPrice: 4.56,
+      lastFundingType: 'LATE_STAGE_VENTURE',     
+      lastFundingDate:  '2024-01-07T00:00:00Z',
+      lastFundingAmount:  25000000
+    },
+  })
+
+  const stripe = await prisma.company.upsert({
+    where: { name: 'Stripe' },
+    update: {},
+    create: {
+      name: 'Stripe',
+      latestFMVPrice: 8.45,
+      lastFundingType: 'SEED',     
+      lastFundingDate:  '2024-01-07T00:00:00Z',
+      lastFundingAmount:  80000000
     },
   })
 
     employees.push(alice, bob, boss)
     console.log({employees})
+    companies.push(carta, reddit, stripe)
+    console.log({companies})
 }
 
 // execute the main function
