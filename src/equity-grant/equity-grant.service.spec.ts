@@ -214,7 +214,6 @@ describe('EquityGrantsService', () => {
       jest.spyOn(prisma.equityGrant, 'delete').mockResolvedValue(null);
   
       await expect(service.deleteEquityGrant(999)).rejects.toThrow(NotFoundException);
-      console.log('to remove')
     });
   });
 });
