@@ -79,3 +79,25 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+## Noam's comments
+
+This project has been both a challenging and enjoyable experience to build. 
+The primary difficulties I encountered were related to setup and test infrastructure. 
+However, I'm pleased to report that all tests are now functioning smoothly, and the server is successfully operational.
+
+There are a few known issues that I have yet to address:
+
+* Environment Configuration: Establishing separate environments for testing, development, and production is still pending. This segregation is crucial for effective application management and deployment.
+
+* Prisma Client Instances: The issue of multiple Prisma Client instances needs to be resolved. I'm considering adopting a singleton pattern or implementing global setup procedures to manage this more efficiently, as it's vital for maintaining application performance and stability.
+
+* Test Environment Management: Improving the management of the test environment, particularly in terms of database cleaning and preparation, is necessary. This will ensure test reliability and consistency.
+
+* Business Logic Expansion: There's a need to further develop the business logic layer and integrate these enhancements into the controller routes. This will provide more functionality and flexibility for future requirements.
+
+* Test Segregation: A better distinction between unit tests and integration tests is required to enhance test organization and clarity.
+
+* Database Seeding for Tests: In case of failures with npm run test, consider running ts-node prisma/seed.ts to seed the database beforehand. This step has been incorporated in the end-to-end (e2e) tests but needs to be manually executed for other testing scenarios.
+
+
