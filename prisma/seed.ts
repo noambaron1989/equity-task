@@ -8,6 +8,7 @@ const prisma = new PrismaClient();
 async function main() {
   const employees = []
   const companies = []
+  const equityGrants = []
   const alice = await prisma.employee.upsert({
       where: { email: 'alice@prisma.io' },
       update: {},
@@ -44,8 +45,6 @@ async function main() {
     },
   })
 
-
-
   const carta = await prisma.company.upsert({
     where: { name: 'Carte' },
     update: {},
@@ -81,10 +80,31 @@ async function main() {
     },
   })
 
+  const equityGrantAliceStripe = await prisma.equityGrant.upsert({
+    where: {
+        id: 1
+    },
+    update: {},
+    create: {
+        employeeId: alice.id,
+        companyId: stripe.id,
+        grantDate: new Date('2024-01-01'),
+        grantType: 'ISO',
+        exerciseDate: new Date('2025-01-01'),
+        deadline: new Date('2026-01-01'),
+        sharePrice: 10.2,
+        totalNumberOfShares: 1000,
+        totalNumberOfVestedShares: 500,
+        vestingPeriod: 4
+    }
+  });
+
     employees.push(alice, bob, boss)
     console.log({employees})
     companies.push(carta, reddit, stripe)
     console.log({companies})
+    equityGrants.push(equityGrantAliceStripe)
+    console.log({equityGrants})
 }
 
 // execute the main function

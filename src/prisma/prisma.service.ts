@@ -36,5 +36,16 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
         });
       
         return Promise.all(deletePromises);
-      }
+    }
+
+    async cleanAllTables() {
+        if (process.env.NODE_ENV === 'production') return;
+
+        // Delete child table records first
+        await this.equityGrant.deleteMany({});
+    
+        // Then delete parent table records
+        await this.employee.deleteMany({});
+        await this.company.deleteMany({});
+    }
 }
