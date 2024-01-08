@@ -28,7 +28,11 @@ describe('EquityGrantsController', () => {
   });
 
   afterEach(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
+  });
+
+  afterAll(async () => {
+    jest.restoreAllMocks();
   });
 
   describe('getAllEquityGrants', () => {
@@ -43,6 +47,7 @@ describe('EquityGrantsController', () => {
           sharePrice: 13.654,
           totalNumberOfShares: 12000,
           totalNumberOfVestedShares: 2000,
+          vestingPeriod: 4,
           employeeId: 2,
           companyId: 1,
           createdAt: new Date('2024-01-06T19:41:18.262Z'),
@@ -74,6 +79,7 @@ describe('EquityGrantsController', () => {
           sharePrice: 10.5,
           totalNumberOfShares: 1000,
           totalNumberOfVestedShares: 200,
+          vestingPeriod: 4,
           employeeId: 1,
           companyId: 2,
           createdAt: new Date('2024-01-06T19:41:18.262Z'),
@@ -109,7 +115,8 @@ describe('EquityGrantsController', () => {
           deadline:new Date('2025-07-07T00:00:00Z'),
           sharePrice:10.5,
           totalNumberOfShares:1000,
-          totalNumberOfVestedShares:200
+          totalNumberOfVestedShares:200,
+          vestingPeriod: 4
         };
         const expectedResult: EquityGrantModel = {
           id: 1,
@@ -122,6 +129,7 @@ describe('EquityGrantsController', () => {
           sharePrice:10.5,
           totalNumberOfShares:1000,
           totalNumberOfVestedShares:200,
+          vestingPeriod: 4,
           createdAt: new Date('2024-01-06T19:41:18.262Z'),
           updatedAt: new Date('2024-01-06T19:45:54.540Z'),
         }
@@ -150,7 +158,8 @@ describe('EquityGrantsController', () => {
           deadline:new Date('2025-07-07T00:00:00Z'),
           sharePrice:10.5,
           totalNumberOfShares:1000,
-          totalNumberOfVestedShares:200
+          totalNumberOfVestedShares:200,
+          vestingPeriod: 4
         };
 
         jest.spyOn(service, 'createEquityGrant').mockImplementation(() => {
@@ -174,7 +183,8 @@ describe('EquityGrantsController', () => {
           deadline:new Date('2025-07-07T00:00:00Z'),
           sharePrice:10.5,
           totalNumberOfShares:1000,
-          totalNumberOfVestedShares:200
+          totalNumberOfVestedShares:200,
+          vestingPeriod: 4
         };
 
         jest.spyOn(service, 'createEquityGrant').mockImplementation(() => {
@@ -195,6 +205,7 @@ describe('EquityGrantsController', () => {
           sharePrice:13.8,
           totalNumberOfShares:2000,
           totalNumberOfVestedShares:543,
+          vestingPeriod: 3.5
         };
         const existingGrant: EquityGrantModel = {
           id: 1,
@@ -207,6 +218,7 @@ describe('EquityGrantsController', () => {
           sharePrice:10.5,
           totalNumberOfShares:1000,
           totalNumberOfVestedShares:200,
+          vestingPeriod: 4,
           createdAt: new Date('2024-01-06T19:41:18.262Z'),
           updatedAt: new Date('2024-01-06T19:45:54.540Z'),
         };
@@ -228,6 +240,7 @@ describe('EquityGrantsController', () => {
           sharePrice:13.8,
           totalNumberOfShares:2000,
           totalNumberOfVestedShares:543,
+          vestingPeriod: 4
         };
 
         jest.spyOn(service, 'updateEquityGrant').mockImplementation(() => {
@@ -245,6 +258,7 @@ describe('EquityGrantsController', () => {
           sharePrice:13.8,
           totalNumberOfShares:2000,
           totalNumberOfVestedShares:543,
+          vestingPeriod: 3.5
         };
         const existingGrant: EquityGrantModel = {
           id: 1,
@@ -257,6 +271,7 @@ describe('EquityGrantsController', () => {
           sharePrice:10.5,
           totalNumberOfShares:1000,
           totalNumberOfVestedShares:200,
+          vestingPeriod: 4,
           createdAt: new Date('2024-01-06T19:41:18.262Z'),
           updatedAt: new Date('2024-01-06T19:45:54.540Z'),
         };
@@ -281,6 +296,7 @@ describe('EquityGrantsController', () => {
           sharePrice:13.8,
           totalNumberOfShares:2000,
           totalNumberOfVestedShares:543,
+          vestingPeriod: 3.5,
         };
         const existingGrant: EquityGrantModel = {
           id: 1,
@@ -293,6 +309,7 @@ describe('EquityGrantsController', () => {
           sharePrice:10.5,
           totalNumberOfShares:1000,
           totalNumberOfVestedShares:200,
+          vestingPeriod:4,
           createdAt: new Date('2024-01-06T19:41:18.262Z'),
           updatedAt: new Date('2024-01-06T19:45:54.540Z'),
         };
@@ -321,6 +338,7 @@ describe('EquityGrantsController', () => {
           sharePrice:10.5,
           totalNumberOfShares:1000,
           totalNumberOfVestedShares:200,
+          vestingPeriod:4,
           createdAt: new Date('2024-01-06T19:41:18.262Z'),
           updatedAt: new Date('2024-01-06T19:45:54.540Z'),
         };

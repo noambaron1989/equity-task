@@ -33,8 +33,8 @@ describe('EquityGrantsService', () => {
   });
 
   afterAll(async () => {
-    jest.restoreAllMocks();// Clean up mocks
-    await prisma.$disconnect(); // Disconnect Prisma client after all tests
+    jest.restoreAllMocks();
+    await prisma.$disconnect();
   });
 
   describe('getAllEquityGrants', () => {
@@ -49,6 +49,7 @@ describe('EquityGrantsService', () => {
           sharePrice: 10.5,
           totalNumberOfShares: 1000,
           totalNumberOfVestedShares: 200,
+          vestingPeriod:4,
           employeeId: 1,
           companyId: 2,
           createdAt: new Date('2024-01-06T19:41:18.262Z'),
@@ -73,6 +74,7 @@ describe('EquityGrantsService', () => {
         sharePrice: 10.5,
         totalNumberOfShares: 1000,
         totalNumberOfVestedShares: 200,
+        vestingPeriod:4,
         employeeId: 1,
         companyId: 2,
         createdAt: new Date('2024-01-06T19:41:18.262Z'),
@@ -105,7 +107,8 @@ describe('EquityGrantsService', () => {
         deadline:new Date('2025-07-07T00:00:00Z'),
         sharePrice:10.5,
         totalNumberOfShares:1000,
-        totalNumberOfVestedShares:200
+        totalNumberOfVestedShares:200,
+        vestingPeriod:4,
         }
 
       const expectedResult: EquityGrantModel = {
@@ -119,6 +122,7 @@ describe('EquityGrantsService', () => {
         sharePrice:10.5,
         totalNumberOfShares:1000,
         totalNumberOfVestedShares:200,
+        vestingPeriod:4,
         createdAt: new Date('2024-01-06T19:41:18.262Z'),
         updatedAt: new Date('2024-01-06T19:45:54.540Z'),
         }
@@ -144,6 +148,7 @@ describe('EquityGrantsService', () => {
         sharePrice:13.8,
         totalNumberOfShares:2000,
         totalNumberOfVestedShares:543,
+        vestingPeriod:3.5
       };
       const existingGrant: EquityGrantModel = {
         id: 1,
@@ -156,6 +161,7 @@ describe('EquityGrantsService', () => {
         sharePrice:10.5,
         totalNumberOfShares:1000,
         totalNumberOfVestedShares:200,
+        vestingPeriod:4,
         createdAt: new Date('2024-01-06T19:41:18.262Z'),
         updatedAt: new Date('2024-01-06T19:45:54.540Z'),
       };
@@ -178,6 +184,7 @@ describe('EquityGrantsService', () => {
         sharePrice:13.8,
         totalNumberOfShares:2000,
         totalNumberOfVestedShares:543,
+        vestingPeriod:4,
       };
 
       jest.spyOn(prisma.equityGrant, 'update').mockResolvedValue(null);
@@ -201,6 +208,7 @@ describe('EquityGrantsService', () => {
         sharePrice:10.5,
         totalNumberOfShares:1000,
         totalNumberOfVestedShares:200,
+        vestingPeriod:4,
         createdAt: new Date('2024-01-06T19:41:18.262Z'),
         updatedAt: new Date('2024-01-06T19:45:54.540Z'),
       };

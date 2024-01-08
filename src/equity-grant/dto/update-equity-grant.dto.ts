@@ -31,4 +31,9 @@ export class UpdateEquityGrantDto {
   @IsNumber()
   @IsPositive()
   totalNumberOfVestedShares?: number;
+
+  @IsOptional()
+  @IsNumber()
+  @IsPositive()
+  vestingPeriod?: number;
 }

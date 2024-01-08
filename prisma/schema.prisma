@@ -49,6 +49,7 @@ model EquityGrant {
   sharePrice          Float    
   totalNumberOfShares Int
   totalNumberOfVestedShares Int
+  vestingPeriod       Int
 }
 
 enum Residency {

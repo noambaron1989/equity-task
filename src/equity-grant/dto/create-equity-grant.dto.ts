@@ -54,4 +54,9 @@ export class CreateEquityGrantDto {
   @IsNotEmpty()
   @IsPositive()
   totalNumberOfVestedShares: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  @IsPositive()
+  vestingPeriod: number;
 }
