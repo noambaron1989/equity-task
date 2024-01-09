@@ -2,7 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "darwin-arm64", "darwin"]
 }
 
 datasource db {
@@ -11,57 +12,57 @@ datasource db {
 }
 
 model Company {
-  id                  Int      @id @default(autoincrement())
-  name                String   @unique
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
-  latestFMVPrice      Float 
-  lastFundingType     FundingType
-  lastFundingDate     DateTime
-  lastFundingAmount   Float
-  equityGrants        EquityGrant[]
+  id                Int           @id @default(autoincrement())
+  name              String        @unique
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  latestFMVPrice    Float
+  lastFundingType   FundingType
+  lastFundingDate   DateTime
+  lastFundingAmount Float
+  equityGrants      EquityGrant[]
 }
 
 model Employee {
-  id          Int       @id @default(autoincrement())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  email       String   @unique
-  firstName   String
-  lastName    String
-  residency   Residency
-  role        String
+  id           Int           @id @default(autoincrement())
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  email        String        @unique
+  firstName    String
+  lastName     String
+  residency    Residency
+  role         String
   equityGrants EquityGrant[]
 }
 
 model EquityGrant {
-  id                  Int      @id @default(autoincrement())
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
-  employeeId          Int
-  employee            Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
-  companyId           Int
-  company             Company  @relation(fields: [companyId], references: [id])
-  grantDate           DateTime
-  grantType           GrantType
-  exerciseDate        DateTime
-  deadline            DateTime
-  sharePrice          Float    
-  totalNumberOfShares Int
+  id                        Int       @id @default(autoincrement())
+  createdAt                 DateTime  @default(now())
+  updatedAt                 DateTime  @updatedAt
+  employeeId                Int
+  employee                  Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  companyId                 Int
+  company                   Company   @relation(fields: [companyId], references: [id])
+  grantDate                 DateTime
+  grantType                 GrantType
+  exerciseDate              DateTime
+  deadline                  DateTime
+  sharePrice                Float
+  totalNumberOfShares       Int
   totalNumberOfVestedShares Int
-  vestingPeriod       Int
+  vestingPeriod             Int
 }
 
 enum Residency {
-  US 
-  IL 
-  GB 
-  CA 
-  AU 
-  DE 
-  FR 
-  JP 
-  IN 
+  US
+  IL
+  GB
+  CA
+  AU
+  DE
+  FR
+  JP
+  IN
 }
 
 enum GrantType {
